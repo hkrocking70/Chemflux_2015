@@ -1,0 +1,898 @@
+@font-face{src:url("../font/JosefinSlab-Regular.ttf");font-family: 'Josefin'}
+@font-face{src:url("../font/Quicksand-Regular.ttf");font-family: 'Quicksand'}
+@font-face{src:url("../font/MyriadPro-Regular.otf");font-family: 'Myriad'}
+
+::-webkit-scrollbar {
+      width: 7px;
+} /* this targets the default scrollbar (compulsory) */
+
+::-webkit-scrollbar-track {
+      background-color: rgba(4,109,175,0.2);
+} /* the new scrollbar will have a flat appearance with the set background color */
+ 
+::-webkit-scrollbar-thumb {
+      background-color: rgba(4,109,175,0.4); 
+} /* this will style the thumb, ignoring the track */
+ 
+::-webkit-scrollbar-button {
+      background-color: rgba(4,109,175,0.4);
+} /* optionally, you can style the top and the bottom buttons (left and right for horizontal bars) */
+ 
+::-webkit-scrollbar-corner {
+      background-color: rgba(255,255,255,0);
+} /* if both the vertical and the horizontal bars appear, then perhaps the right bottom corner also needs to be styled */
+
+.st-container {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	font-family: 'Josefin', 'Myriad', Arial, sans-serif;
+}
+
+.st-fest
+{
+	overflow-y: scroll !important;
+	padding-bottom: 7%;
+}
+
+.st-container > input,
+.st-container > a{
+	position: fixed;
+	bottom: 0px;
+	width: calc(100%/7);
+	cursor: pointer;
+	font-size: 16px;
+	height: 34px;
+	line-height: 34px;
+}
+
+
+.st-container > input {
+	opacity: 0;
+	z-index: 1000;
+}
+
+.st-container > a {
+	z-index: 10;
+	font-weight: 700;
+	background: #ccc;
+	color: #000;
+	border-top: 1px solid #000;
+	text-align: center;
+	text-shadow: 1px 1px 1px rgba(151,24,64,0.2);
+}
+
+/* "Fix" for percentage rounding: add a background bar pseudo element with the same color like the labels */
+.st-container:before {
+	content: '';
+	position: fixed;
+	width: 100%;
+	height: 34px;
+	background: #e23a6e;
+	z-index: 9;
+	bottom: 0;
+}
+
+#st-control-1, #st-control-1 + a {
+	left: 0;
+}
+
+#st-control-2, #st-control-2 + a {
+	left: calc(100%/7);
+}
+
+#st-control-3, #st-control-3 + a {
+	left: calc(200%/7);
+}
+
+#st-control-4, #st-control-4 + a {
+	left: calc(300%/7);
+}
+
+#st-control-5, #st-control-5 + a {
+	left: calc(400%/7);
+}
+
+#st-control-6, #st-control-6 + a {
+	left: calc(500%/7);
+}
+
+#st-control-7, #st-control-7 + a {
+	left: calc(600%/7);
+}
+
+.st-container > input:checked + a,
+.st-container > input:checked:hover + a{
+	background: #000;
+	color: #fff;
+}
+
+.st-container > input:checked + a:after,
+.st-container > input:checked:hover + a:after{
+	bottom: 100%;
+	border: solid transparent;
+	content: '';
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+	border-bottom-color: #000;
+	border-width: 20px;
+	left: 50%;
+	margin-left: -20px;
+}
+
+.st-container > input:hover + a{
+	background: #000;
+	color: #fff;
+}
+
+.st-container > input:hover + a:after {
+	border-bottom-color: #000;
+}
+
+.st-scroll,
+.st-panel {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+.st-scroll {
+	top: 0;
+	left: 0;
+	-webkit-transition: all 0.6s ease-in-out;
+	-moz-transition: all 0.6s ease-in-out;
+	-o-transition: all 0.6s ease-in-out;
+	-ms-transition: all 0.6s ease-in-out;
+	transition: all 0.6s ease-in-out;
+	
+	/* Let's enforce some hardware acceleration */
+	-webkit-transform: translate3d(0, 0, 0);
+	-webkit-backface-visibility: hidden;
+}
+
+.st-panel{
+	background: rgba(4,109,175,0.2);
+	overflow: hidden;
+} 
+
+#st-control-1:checked ~ .st-scroll {
+	-webkit-transform: translateY(0%);
+	-moz-transform: translateY(0%);
+	-o-transform: translateY(0%);
+	-ms-transform: translateY(0%);
+	transform: translateY(0%);
+}
+#st-control-2:checked ~ .st-scroll {
+	-webkit-transform: translateY(-100%);
+	-moz-transform: translateY(-100%);
+	-o-transform: translateY(-100%);
+	-ms-transform: translateY(-100%);
+	transform: translateY(-100%);
+}
+#st-control-3:checked ~ .st-scroll {
+	-webkit-transform: translateY(-200%);
+	-moz-transform: translateY(-200%);
+	-o-transform: translateY(-200%);
+	-ms-transform: translateY(-200%);
+	transform: translateY(-200%);
+}
+#st-control-4:checked ~ .st-scroll {
+	-webkit-transform: translateY(-300%);
+	-moz-transform: translateY(-300%);
+	-o-transform: translateY(-300%);
+	-ms-transform: translateY(-300%);
+	transform: translateY(-300%);
+}
+#st-control-5:checked ~ .st-scroll {
+	-webkit-transform: translateY(-400%);
+	-moz-transform: translateY(-400%);
+	-o-transform: translateY(-400%);
+	-ms-transform: translateY(-400%);
+	transform: translateY(-400%);
+}
+
+#st-control-6:checked ~ .st-scroll {
+	-webkit-transform: translateY(-500%);
+	-moz-transform: translateY(-500%);
+	-o-transform: translateY(-500%);
+	-ms-transform: translateY(-500%);
+	transform: translateY(-500%);
+}
+
+#st-control-7:checked ~ .st-scroll {
+	-webkit-transform: translateY(-600%);
+	-moz-transform: translateY(-600%);
+	-o-transform: translateY(-600%);
+	-ms-transform: translateY(-600%);
+	transform: translateY(-600%);
+}
+
+
+/* Content elements */
+
+.st-deco{
+	width: 200px;
+	height: 200px;
+	position: absolute;
+	top: 0px;
+	left: 50%;
+	margin-left: -100px;
+//	-webkit-transform: translateY(-50%) rotate(45deg);
+//	-moz-transform: translateY(-50%) rotate(45deg);
+//	-o-transform: translateY(-50%) rotate(45deg);
+//	-ms-transform: translateY(-50%) rotate(45deg);
+//	transform: translateY(-50%) rotate(45deg);
+}
+
+#st-panel-1 .st-deco
+{
+	background: url("../images/default.jpg");
+	background-size: cover;
+}
+
+#st-panel-2 .st-deco
+{
+	background: url("../images/default.jpg");
+	background-size: cover;
+}
+
+#st-panel-3 .st-deco
+{
+	background: url("../images/default.jpg");
+	background-size: cover;
+}
+
+#st-panel-4 .st-deco
+{
+	background: url("../images/default.jpg");
+	background-size: cover;
+}
+
+#st-panel-5 .st-deco
+{
+	background: url("../images/default.jpg");
+	background-size: cover;
+}
+
+#st-panel-6 .st-deco
+{
+	background: url("../images/default.jpg");
+	background-size: cover;
+}
+
+#st-panel-7 .st-deco
+{
+	background: url("../images/default.jpg");
+	background-size: cover;
+}
+
+/*[data-icon]:after {
+    content: attr(data-icon);
+    font-family: 'RaphaelIcons';
+    color: #fff;
+	text-shadow: 1px 1px 1px rgba(151,24,64,0.2);
+	position: absolute;
+	width: 200px;
+	height: 200px;
+	line-height: 200px;
+	text-align: center;
+	font-size: 90px;
+	top: 50%;
+	left: 50%;
+	margin: -100px 0 0 -100px;
+	-webkit-transform: rotate(-45deg) translateY(25%);
+	-moz-transform: rotate(-45deg) translateY(25%);
+	-o-transform: rotate(-45deg) translateY(25%);
+	-ms-transform: rotate(-45deg) translateY(25%);
+	transform: rotate(-45deg) translateY(25%);
+}*/
+
+.st-panel h2 {
+	color: #000;
+	text-shadow: 1px 1px 1px rgba(151,24,64,0.2);
+	position: absolute;
+	font-size: 54px;
+	width: 80%;
+	left: 10%;
+	text-align: center;
+	line-height: 50px;
+	margin: -70px 0 0 0;
+	padding: 0;
+	top: 50%;
+	-webkit-backface-visibility: hidden;
+}
+
+
+
+#st-control-1:checked ~ .st-scroll #st-panel-1 .st-head,
+#st-control-2:checked ~ .st-scroll #st-panel-2 .st-head,
+#st-control-3:checked ~ .st-scroll #st-panel-3 .st-head,
+#st-control-4:checked ~ .st-scroll #st-panel-4 .st-head,
+#st-control-5:checked ~ .st-scroll #st-panel-5 .st-head,
+#st-control-6:checked ~ .st-scroll #st-panel-6 .st-head,
+#st-control-7:checked ~ .st-scroll #st-panel-7 .st-head{
+	-webkit-animation: moveDown 0.6s ease-in-out 0.2s backwards;
+	-moz-animation: moveDown 0.6s ease-in-out 0.2s backwards;
+	-o-animation: moveDown 0.6s ease-in-out 0.2s backwards;
+	-ms-animation: moveDown 0.6s ease-in-out 0.2s backwards;
+	animation: moveDown 0.6s ease-in-out 0.2s backwards;
+}
+
+@-webkit-keyframes moveDown{
+	0% { 
+		-webkit-transform: translateY(-40px); 
+		opacity: 0;
+	}
+	100% { 
+		--transform: translateY(0px);  
+		opacity: 1;
+	}
+}
+
+@-moz-keyframes moveDown{
+	0% { 
+		-moz-transform: translateY(-40px); 
+		opacity: 0;
+	}
+	100% { 
+		-moz-transform: translateY(0px);  
+		opacity: 1;
+	}
+}
+
+@-o-keyframes moveDown{
+	0% { 
+		-o-transform: translateY(-40px); 
+		opacity: 0;
+	}
+	100% { 
+		-o-transform: translateY(0px);  
+		opacity: 1;
+	}
+}
+
+@-ms-keyframes moveDown{
+	0% { 
+		-ms-transform: translateY(-40px); 
+		opacity: 0;
+	}
+	100% { 
+		-ms-transform: translateY(0px);  
+		opacity: 1;
+	}
+}
+
+@keyframes moveDown{
+	0% { 
+		transform: translateY(-40px); 
+		opacity: 0;
+	}
+	100% { 
+		transform: translateY(0px);  
+		opacity: 1;
+	}
+}
+
+
+.st-panel p {
+	position: absolute;
+	text-align: center;
+	font-size: 20px;
+	line-height: 22px;
+	color: blue;
+	z-index: 2;
+	padding: 0;
+	width: 50%;
+	left: 25%;
+	top: 50%;
+	margin: 10px 0 0 0;
+	-webkit-backface-visibility: hidden;
+}
+
+
+#st-control-1:checked ~ .st-scroll #st-panel-1 .st-subhead,
+#st-control-2:checked ~ .st-scroll #st-panel-2 .st-subhead,
+#st-control-3:checked ~ .st-scroll #st-panel-3 .st-subhead,
+#st-control-4:checked ~ .st-scroll #st-panel-4 .st-subhead,
+#st-control-5:checked ~ .st-scroll #st-panel-5 .st-subhead,
+#st-control-6:checked ~ .st-scroll #st-panel-6 .st-subhead,
+#st-control-7:checked ~ .st-scroll #st-panel-7 .st-subhead{
+	-webkit-animation: moveUp 0.6s ease-in-out 0.2s backwards;
+	-moz-animation: moveUp 0.6s ease-in-out 0.2s backwards;
+	-o-animation: moveUp 0.6s ease-in-out 0.2s backwards;
+	-ms-animation: moveUp 0.6s ease-in-out 0.2s backwards;
+	animation: moveUp 0.6s ease-in-out 0.2s backwards;
+}
+
+
+
+@-webkit-keyframes moveUp{
+	0% { 
+		-webkit-transform: translateY(40px); 
+		opacity: 0;
+	}
+	100% { 
+		-webkit-transform: translateY(0px);  
+		opacity: 1;
+	}
+}
+
+@-moz-keyframes moveUp{
+	0% { 
+		-moz-transform: translateY(40px); 
+		opacity: 0;
+	}
+	100% { 
+		-moz-transform: translateY(0px);  
+		opacity: 1;
+	}
+}
+
+@-o-keyframes moveUp{
+	0% { 
+		-o-transform: translateY(40px); 
+		opacity: 0;
+	}
+	100% { 
+		-o-transform: translateY(0px);  
+		opacity: 1;
+	}
+}
+
+@-ms-keyframes moveUp{
+	0% { 
+		-ms-transform: translateY(40px); 
+		opacity: 0;
+	}
+	100% { 
+		-ms-transform: translateY(0px);  
+		opacity: 1;
+	}
+}
+
+@keyframes moveUp{
+	0% { 
+		transform: translateY(40px); 
+		opacity: 0;
+	}
+	100% { 
+		transform: translateY(0px);  
+		opacity: 1;
+	}
+}
+
+/* Colored sections */
+
+.st-color,
+.st-deco{
+	background: rgba(10,72,111,0.3);
+}
+.st-color [data-icon]:after {
+	color: #ccc;
+}
+.st-color .st-deco {
+	background: #fff;
+}
+.st-color h2 {
+	color: #000;
+	text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+} 
+.st-color p {
+	//color: #ff;
+	//color: rgba(255,255,255,0.8);
+	color: blue;
+}
+
+.st-panel .st-con
+{
+	display: inline-block;
+	overflow: hidden;
+	text-align: center;
+	max-width:40%;
+	margin-top: 2%;
+	vertical-align: top;
+	font-family: "Myriad";
+}
+
+.st-con .st-head
+{
+	font-size: 250%;
+}
+
+
+.st-con .st-subhead
+{
+	font-size: 110%;
+}
+
+.st-box
+{
+	overflow-y: auto;
+}
+
+.st-box .box
+{
+	display: inline-block;
+	box-sizing: border-box;
+	overflow: hidden;
+	font-family: "Arial";
+	width: 170px;
+	height: 170px;
+	color: #fff;
+	overflow: hidden;
+	box-shadow: 0 4px 6px 1px rgba(50, 50, 50, 0.14);
+}
+.st-box .event
+{
+	overflow: hidden;
+	box-shadow: 0 3px 8px 1px rgba(0,0,0,0.14);
+}
+
+.st-box .event:hover, .close:hover
+{
+	cursor: pointer;
+}
+
+.modal
+{
+	width: 80%;
+	height: 60%;
+	z-index: 1;
+	background: rgba(255,255,255,1);
+	position: absolute;
+	margin: 10% 0% 0% 10%;
+	display: none;
+	box-sizing: border-box;
+	font-size: 20px;
+	box-shadow: 0 4px 6px 1px rgba(50, 50, 50, 0.3);
+	text-align: justify;
+	border-radius: 1%;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+.layer
+{
+	background: rgba(0,0,0,0.1);
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	display: none;
+}
+
+.m_con
+{
+	color: #000;
+	font-family: "Myriad";
+	font-size: 23px;
+	padding: 1%;
+}
+
+.close
+{
+	float: right;
+	z-index: 3;
+	padding: 0.3% 1.5% 0% 0%;
+}
+.ename
+{
+	padding-top: 28%;
+	font-size: 30px;
+	font-family: 'Myriad';
+	overflow: hidden;
+	word-wrap: break-word;
+}
+
+.edesc
+{
+	display: none;
+}
+
+.box  div
+{
+	visibility: hidden;
+	box-sizing: border-box;
+	word-wrap: break-word;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	padding: 2%;
+	//-webkit-transition: all 0.1s ease-in 0s;
+	-webkit-animation: moveDown 0.2s ease-in-out 0.0s backwards;
+	-moz-animation: moveDown 0.2s ease-in-out 0.0s backwards;
+	-o-animation: moveDown 0.2s ease-in-out 0.0s backwards;
+	-ms-animation: moveDown 0.2s ease-in-out 0.0s backwards;
+	animation: moveDown 0.2s ease-in-out 0.0s backwards;
+}
+
+.box:hover div
+{
+	visibility: visible;
+	background: rgba(0,0,0,0.3);
+	box-sizing: border-box;
+	//-webkit-transition: all 0.5s ease-in 0s;
+	-webkit-animation: moveUp 0.2s ease-in-out 0.0s backwards;
+	-moz-animation: moveUp 0.2s ease-in-out 0.0s backwards;
+	-o-animation: moveUp 0.2s ease-in-out 0.0s backwards;
+	-ms-animation: moveUp 0.2s ease-in-out 0.0s backwards;
+	animation: moveUp 0.2s ease-in-out 0.0s backwards;
+}
+
+details ul
+{
+	transition: all 1s ease-in 2s;
+}
+
+summary:hover
+{
+	cursor: pointer;
+}
+
+#box1
+{
+	background: url("../images/img1.jpg");
+	background-size: cover;
+}
+
+#box2
+{
+	background: url("../images/img2.jpg");
+	background-size: cover;
+}
+
+#box3
+{
+	background: url("../images/img3.jpg");
+	background-size: cover;
+}
+
+#box4
+{
+	background: url("../images/img4.jpg");
+	background-size: cover;
+}
+
+#box5
+{
+	background: url("../images/img5.jpg");
+	background-size: cover;
+}
+
+#box6
+{
+	background: url("../images/img6.jpg");
+	background-size: cover;
+}
+
+#box7
+{
+	background: url("../images/img7.jpg");
+	background-size: cover;
+}
+
+#box8
+{
+	background: url("../images/img8.jpg");
+	background-size: cover;
+}
+
+#box9
+{
+	background: url("../images/img9.jpg");
+	background-size: cover;
+}
+
+.st-subhead img
+{
+	width: 20%;
+}
+.sp
+{
+	width: 320px;
+	height: 130px;
+}
+
+.sp
+{
+	display: inline-block;
+}
+
+.st-sp
+{
+	max-width: 80%;
+	display: block;
+	overflow: hidden;
+	text-align: center;
+	margin-top: 1%;
+	vertical-align: top;
+	font-family: "Myriad";
+	padding: 0%;
+	font-size: 25px;
+}
+
+.st-box .event
+{
+	display: inline-block;
+	width: 200px;
+	height: 200px;
+//	border: 1px solid #000;
+	word-wrap: break-word;
+	border-radius: 50%;
+	background: rgba(255,255,255,1);
+}
+
+.st-box .event:hover
+{
+	background: rgba(54,154,217,0.5);
+	-webkit-animation: moveUp 0.2s ease-in-out 0.0s backwards;
+	-moz-animation: moveUp 0.2s ease-in-out 0.0s backwards;
+	-o-animation: moveUp 0.2s ease-in-out 0.0s backwards;
+	-ms-animation: moveUp 0.2s ease-in-out 0.0s backwards;
+	animation: moveUp 0.2s ease-in-out 0.0s backwards;
+	color: #fff;
+	box-shadow: 0 3px 8px 1px rgba(0,0,0,0.34);
+}
+
+.st-box
+{
+	margin-top: 5%;
+}
+
+.st-panel
+{
+	padding-top: 5%;
+}
+
+
+
+.header
+{
+	position: fixed;	
+	height: 20%;
+	z-index: 2;
+	width: 100%;
+	overflow: hidden;
+}
+
+.header .register
+{
+	float: left;
+	font-size: 20px;
+	color: #000;
+	font-family: 'Myriad';
+	margin-top: 3%;
+	//background: #fff;
+	padding: 1px 2px 1px 2px;
+}
+
+.header .logo
+{
+	height: 100%;
+	float: left;
+}
+
+.header .srm
+{
+	height: 70%;
+	float: right;
+}
+
+.home_page
+{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background: #fff;
+	z-index: 1001;
+	text-align: center;
+}
+
+.enter
+{
+	background: rgba(82,149,204,1);
+	max-width: 10%;
+	padding: 1% 0.25% 1% 0.25%;
+	color: #fff;
+	font-size: 17px;
+	font-family: "Arial";
+}
+
+.enter:hover
+{
+	cursor: pointer;
+	background: rgba(80,170,255,1);
+}
+
+.h_logo
+{
+	text-align: center;
+}
+
+.home_page .h_logo
+{
+	width: 100%;
+	height: 100%;
+	background: -webkit-linear-gradient(left top,rgba(27,127,99,0.4),#fff,rgba(27,127,99,0.4));
+	background: -mos-linear-gradient(left top,rgba(27,127,99,0.4),#fff,rgba(27,127,99,0.4));
+	background: -o-linear-gradient(left top,rgba(27,127,99,0.4),#fff,rgba(27,127,99,0.4));
+	background: linear-gradient(left top,rgba(27,127,99,0.4),#fff,rgba(27,127,99,0.4));
+	background: linear-gradient(65deg,rgba(27,127,99,0.4),#fff,rgba(27,127,99,0.4));
+}
+
+details ul li
+{
+	transition: all 1s ease-in 2s;
+}
+
+summary
+{
+	font-size: 30px;
+	background: rgba(27,127,99,0.2);
+}
+
+.st-sponsor
+{
+	display: inline-block !important;
+	overflow-y: scroll;
+	padding-bottom: 5%;
+}
+
+@media screen and (max-width: 520px) {
+	.st-panel h2 {
+		font-size: 42px;
+	}
+	
+	.st-panel
+	{
+		padding-top: 20%;
+	}
+
+	.st-panel p {
+		width: 90%;
+		left: 5%;
+		margin-top: 0;
+	}
+	
+	.st-container > a {
+		font-size: 13px;
+	}
+
+	.st-panel .st-con
+	{
+		display: block;
+		overflow: hidden;
+		text-align: center;
+		max-width:100%;
+		margin-top: 5%;
+		vertical-align: top;
+		font-family: "Myriad";
+		padding: 2%;
+	}
+
+	.st-con .st-head
+	{
+		font-size: 150%;
+	}
+
+
+	.st-con .st-subhead
+	{
+		font-size: 80%;
+	}
+}
+@media screen and (max-width: 360px) {
+	.st-container > a {
+		font-size: 10px;
+	}
+	
+	.st-deco{
+		width: 120px;
+		height: 120px;
+		margin-left: -60px;
+	}
+	
+}
